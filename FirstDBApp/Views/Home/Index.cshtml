@@ -1,0 +1,209 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<table class="table table-striped table-hover mt-3">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col"><a asp-controller="Home" asp-action="AddNewRecord" class="btn btn-dark" data-toggle="modal" data-target="#AddNewRecord">Add New</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.emplist)
+        {
+            <tr>
+                <th scope="row">@item.id</th>
+                <td>@item.name</td>
+                <td>@item.email</td>
+                <td>@item.phone</td>
+                <td>
+                    <a href="#" data-toggle="modal" data-target="#EditRecord" class="edit px-0" data-id="@item.id"><i class="fas fa-edit text-secondary fa-lg"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#DeleteRecord" class="delete px-0" data-id="@item.id"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="AddNewRecord">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-controller="Home" asp-action="AddNewRecord" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>ID:</label>
+                        <input type="text" class="form-control" name="id" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" name="Name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="Email" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" class="form-control" name="phone" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="EditRecord">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-controller="Home" asp-action="EditRecord" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>ID:</label>
+                        <input type="text" class="form-control" name="id" id=id required readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" name="Name" id="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="Email" id="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" class="form-control" name="phone" id="phone" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="DeleteRecord">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-controller="Home" asp-action="DeleteRecord" autocomplete="off">
+                <div class="modal-body">
+                    <h3>Do you want to delete this record?</h3>
+                    <div class="form-group">
+                        <label>ID:</label>
+                        <input type="text" class="form-control" name="id" id=id required readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" name="Name" id="name" required readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="Email" id="email" required readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" class="form-control" name="phone" id="phone" required readonly />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+@section Scripts
+{
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            swal({
+                title: "@TempData["SuccessMessage"]",
+                icon: "success",
+                button: "Ok",
+            });
+        </script>
+    }
+    @if(TempData["ErrorMessage"] != null)
+    {
+        <script>
+            swal({
+                title: "OPS!",
+                text: "@TempData["ErrorMessage"]",
+                icon: "error",
+                button: "Ok",
+            });
+        </script>
+    }
+
+    <script>
+        $(document).ready(function () {
+            $('table .edit').on('click', function () {
+                var id = $(this).data("id");
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Home/FindRecord',
+                    data: { "cusid": id },
+                    success: function (response) {
+                        $('#EditRecord #id').val(response.id);
+                        $('#EditRecord #name').val(response.name);
+                        $('#EditRecord #email').val(response.email);
+                        $('#EditRecord #phone').val(response.phone);
+                    }
+                })
+            });
+
+            $('table .delete').on('click', function () {
+                var id = $(this).data("id");
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Home/FindRecord',
+                    data: { "cusid": id },
+                    success: function (response) {
+                        $('#DeleteRecord #id').val(response.id);
+                        $('#DeleteRecord #name').val(response.name);
+                        $('#DeleteRecord #email').val(response.email);
+                        $('#DeleteRecord #phone').val(response.phone);
+                    }
+                })
+            });
+
+        });
+    </script>
+}
